@@ -1,0 +1,369 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  width: auto;
+  align-items: center;
+  background-color: #00489c;
+  color: white;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.todoMenu {
+  margin-left: 2vh;
+  margin-right: 0.8vh;
+  filter: invert(100%);
+}
+
+.todoTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 1.2vh;
+  line-height: 8vh;
+}
+
+.search {
+  display: flex;
+  margin-left: auto;
+  margin-right: 2vh;
+  align-items: center;
+}
+
+.searchInput {
+  font-size: 1.2rem;
+  width: 16vh;
+  border: 1px solid #cccccc;
+  border-radius: 4px 0px 0px 4px;
+  padding: 1.2vh;
+}
+
+.searchImg {
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
+  border-radius: 0px 4px 4px 0px;
+  width: 4.8vh;
+  height: 4.8vh;
+}
+
+.todoApp {
+  display: flex;
+  height: 90vh;
+}
+
+.todoClass {
+  width: 13vw;
+  background-color: #eeeeee;
+  display: none;
+}
+
+.todoClassDiv {
+  display: flex;
+  margin: 1.5em 1em 2em 1em;
+}
+
+.todoClassText {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-left: 2vh;
+}
+
+.todoClassCount {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: auto;
+}
+
+.deadlineModal {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  width: 10vw;
+  background-color: white;
+  border: 1px solid #cccccc;
+}
+
+.dModalTitle {
+  font-size: 1.2rem;
+  margin: 5px 0 5px 0;
+  text-align: center;
+}
+
+.selectDL {
+  margin: 0.5vh 0 2vh 0;
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+}
+
+.setDate {
+  display: flex;
+  align-items: center;
+  margin: 1vh 1vh 2vh 1vh;
+}
+
+.deadlineImg {
+  height: 28px;
+  margin-right: 1vw;
+}
+
+.deadlineText {
+  font-size: 1.2rem;
+}
+
+.deadlineDate {
+  margin-left: auto;
+  font-size: 1.2rem;
+}
+
+.deadlineCalendar {
+  width: 100%;
+}
+
+.priorityModal {
+  display: block;
+  position: absolute;
+  display: none;
+  z-index: 10;
+  width: 9vw;
+  background-color: white;
+  border: 1px solid #cccccc;
+}
+
+.pModalTitle {
+  font-size: 1.2rem;
+  margin: 5px 0 5px 0;
+  text-align: center;
+}
+
+.setPrio {
+  margin: 0.5vh 0 2vh 0;
+  border-top: 1px solid #cccccc;
+}
+
+.priority {
+  display: flex;
+  align-items: center;
+  margin: 1vh 1vh 2vh 1vh;
+}
+
+.p1img,
+.p2img,
+.p3img,
+.p4img {
+  height: 28px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.p1img {
+  filter: invert(25%) sepia(41%) saturate(3408%) hue-rotate(345deg)
+    brightness(98%) contrast(86%);
+}
+
+.p2img {
+  filter: invert(42%) sepia(89%) saturate(2458%) hue-rotate(145deg)
+    brightness(95%) contrast(83%);
+}
+
+.p3img {
+  filter: invert(18%) sepia(60%) saturate(3282%) hue-rotate(201deg)
+    brightness(94%) contrast(102%);
+}
+
+.prioText {
+  font-size: 1.2rem;
+}
+
+.inboxContainer,
+.todayContainer,
+.importantContainer {
+  flex-grow: 1;
+  margin: 1em;
+}
+
+.todoType {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1vh auto 2vh;
+}
+
+.todoInbox {
+  display: flex;
+  align-items: center;
+}
+
+.inboxImg {
+  margin-right: 1vw;
+}
+
+.today {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+.addTodo {
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.showAddTodo {
+  display: flex;
+  margin: 1vh 1vh 0.75vh 1vh;
+}
+
+.showAddOptions {
+  background: transparent;
+  margin-right: 1vh;
+  border: none;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #00489c;
+}
+
+.addInput {
+  font-size: 1.6rem;
+  border: none;
+  color: #00489c;
+  width: calc(100% - 2vh);
+  box-sizing: border-box;
+}
+
+.addInput::placeholder {
+  color: #00489c;
+}
+
+.setButtons {
+  display: none;
+  margin: 1.6vh 1vh 1vh 1vh;
+}
+
+.setDeadLine {
+  width: 28px;
+  height: 30px;
+  margin-right: 2.5vw;
+}
+
+.setPriority {
+  width: 28px;
+  height: 28px;
+}
+
+.addButtons {
+  margin-left: auto;
+}
+
+.addButtons button {
+  border: none;
+  width: 4.8vw;
+  height: 3.6vh;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.cancelBtn {
+  margin-right: 0.5vw;
+}
+
+.addBtn {
+  margin-left: 0.5vw;
+  background-color: #00489c;
+  color: white;
+}
+
+.todoList {
+  position: relative;
+  z-index: 1;
+}
+
+.nowTodos {
+  display: flex;
+  flex-direction: column;
+  margin: 4vh 0 3vh 0;
+}
+
+.todoItem {
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2vh;
+}
+
+.checkBox {
+  width: 2.4vh;
+  height: 2.4vh;
+  margin: 1.2vh;
+  border: 3px solid #00489c;
+  border-radius: 20%;
+}
+
+.todoText {
+  font-size: 1.6rem;
+  margin-left: 0.6vh;
+  border: none;
+  color: #00489c;
+  box-sizing: border-box;
+}
+
+.finInfo {
+  display: flex;
+  margin-bottom: 3vh;
+  align-items: center;
+}
+
+.showFinTodos {
+  background-color: transparent;
+  border: none;
+  margin-left: 1vh;
+}
+
+.finText {
+  font-size: 1.6rem;
+  margin: 1vh 2vh;
+}
+
+.countFinTodos {
+  font-size: 1.2rem;
+}
+
+.finTodoUl {
+  display: none;
+}
+
+.finCheckBox {
+  width: 2.4vh;
+  height: 2.4vh;
+  margin: 1.2vh;
+  border: 3px solid #00489c;
+  border-radius: 20%;
+  background-color: #00489c;
+  color: white;
+  display: flex;
+}
+
+.checkBoxImg {
+  filter: invert(100%);
+}
+
+.finTodoText {
+  font-size: 1.6rem;
+  margin-left: 0.6vh;
+  border: none;
+  color: #00489c;
+  box-sizing: border-box;
+  color: #cccccc;
+  font-style: italic;
+  text-decoration: line-through;
+}

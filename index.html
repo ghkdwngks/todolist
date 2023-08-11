@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <img src="imgs/hamburgerMenu.png" class="todoMenu" />
+      <div class="todoTitle">TodoList</div>
+      <div class="search">
+        <input type="text" class="searchInput" placeholder="검색어 입력" />
+        <img src="imgs/search.png" class="searchImg" />
+      </div>
+    </header>
+    <div class="todoApp">
+      <nav class="todoClass">
+        <div class="todoClassDiv" id="inbox">
+          <div class="todoClassImg">
+            <img src="imgs/inbox.png" />
+          </div>
+          <div class="todoClassText">작업 관리</div>
+          <div class="todoClassCount">1</div>
+        </div>
+        <div class="todoClassDiv" id="today">
+          <div class="todoClassImg">
+            <img src="imgs/today.png" />
+          </div>
+          <div class="todoClassText">오늘 할 작업</div>
+          <div class="todoClassCount">2</div>
+        </div>
+        <div class="todoClassDiv" id="important">
+          <div class="todoClassImg">
+            <img src="imgs/important.png" />
+          </div>
+          <div class="todoClassText">중요한 작업</div>
+          <div class="todoClassCount">1</div>
+        </div>
+      </nav>
+      <div class="inboxContainer">
+        <div class="todoType">
+          <div class="todoInbox">
+            <img src="imgs/inbox.png" class="inboxImg" />
+            <div class="inboxTitle">작업 관리</div>
+          </div>
+        </div>
+        <div class="addTodo">
+          <div class="showAddTodo">
+            <button class="showAddOptions">+</button>
+            <input type="text" class="addInput" placeholder="작업 추가" />
+          </div>
+          <div class="setButtons">
+            <img src="imgs/deadline.png" class="setDeadLine" />
+            <img src="imgs/priority.png" class="setPriority" />
+            <div class="addButtons">
+              <button class="cancelBtn">취소</button>
+              <button class="addBtn">추가</button>
+            </div>
+          </div>
+        </div>
+        <div class="deadlineModal">
+          <div class="dModalTitle">기한</div>
+          <div class="selectDL">
+            <div class="setDate" id="setToday">
+              <img src="imgs/today.png" class="deadlineImg" />
+              <div class="deadlineText">오늘</div>
+              <div class="deadlineDate" id="todayDate">목</div>
+            </div>
+            <div class="setDate" id="setTomorrow">
+              <img src="imgs/tomorrow.png" class="deadlineImg" />
+              <div class="deadlineText">내일</div>
+              <div class="deadlineDate" id="tomorrowDate">금</div>
+            </div>
+            <div class="setDate" id="setNextWeek">
+              <img src="imgs/nextWeek.png" class="deadlineImg" />
+              <div class="deadlineText">다음 주</div>
+              <div class="deadlineDate" id="nextWeekDate">월</div>
+            </div>
+          </div>
+          <div class="calendar">
+            <img src="imgs/calendar.png" class="deadlineCalendar" />
+          </div>
+        </div>
+        <div class="priorityModal">
+          <div class="pModalTitle">우선순위</div>
+          <div class="setPrio">
+            <div class="priority" id="p1">
+              <img src="imgs/priority.png" class="p1img" />
+              <div class="prioText">우선순위 1</div>
+            </div>
+            <div class="priority" id="p2">
+              <img src="imgs/priority.png" class="p2img" />
+              <div class="prioText">우선순위 2</div>
+            </div>
+            <div class="priority" id="p3">
+              <img src="imgs/priority.png" class="p3img" />
+              <div class="prioText">우선순위 3</div>
+            </div>
+            <div class="priority" id="p4">
+              <img src="imgs/priority.png" class="p4img" />
+              <div class="prioText">우선순위 4</div>
+            </div>
+          </div>
+        </div>
+        <div class="todoList">
+          <section class="nowTodos">
+            <ul class="todos">
+              <li class="todoItem">
+                <div class="checkBox"></div>
+                <div class="todoText">작업 내용</div>
+              </li>
+              <li class="todoItem">
+                <div class="checkBox"></div>
+                <div class="todoText">작업 내용</div>
+              </li>
+              <li class="todoItem">
+                <div class="checkBox"></div>
+                <div class="todoText">작업 내용</div>
+              </li>
+            </ul>
+          </section>
+          <section class="finTodos">
+            <div class="finInfo">
+              <button class="showFinTodos">▷</button>
+              <div class="finText">완료됨</div>
+              <div class="countFinTodos">1</div>
+            </div>
+            <ul class="finTodoUl">
+              <li class="todoItem">
+                <div class="finCheckBox">
+                  <img src="imgs/check.png" class="checkBoxImg" />
+                </div>
+                <div class="finTodoText">작업 내용</div>
+                <div class="setTodo"></div>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+    <script src="todo.js"></script>
+  </body>
+</html>
