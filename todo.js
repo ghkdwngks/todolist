@@ -19,9 +19,6 @@ const finTodoUl = document.querySelector(".finTodoUl");
 const addBtn = document.querySelector(".addBtn");
 const todosUl = document.querySelector(".todos");
 const setDate = document.querySelector(".setDate");
-const setToday = document.getElementById("setToday");
-const setTomorrow = document.getElementById("setTomorrow");
-const setNextWeek = document.getElementById("setNextWeek");
 
 let todolist = [];
 
