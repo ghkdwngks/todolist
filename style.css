@@ -305,7 +305,7 @@ ul {
   width: 2.4vh;
   height: 2.4vh;
   margin: 1.2vh;
-  border: 3px solid #00489c;
+  border: 3px solid black;
   border-radius: 20%;
 }
 
@@ -346,9 +346,9 @@ ul {
   width: 2.4vh;
   height: 2.4vh;
   margin: 1.2vh;
-  border: 3px solid #00489c;
+  border: 3px solid black;
   border-radius: 20%;
-  background-color: #00489c;
+  background-color: black;
   color: white;
   display: flex;
 }
