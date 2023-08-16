@@ -19,6 +19,10 @@ const finTodoUl = document.querySelector(".finTodoUl");
 const addBtn = document.querySelector(".addBtn");
 const todosUl = document.querySelector(".todos");
 const setDate = document.querySelector(".setDate");
+const setToday = document.getElementById("setToday");
+const setTomorrow = document.getElementById("setTomorrow");
+const setNextWeek = document.getElementById("setNextWeek");
+const dModalTitle = document.querySelector(".dModalTitle");
 
 let todolist = [];
 
@@ -38,6 +42,10 @@ function addTodo() {
     deadline: "none",
     priority: "none",
   };
+
+  if (currentDeadlineType) {
+    newTodo.deadline = currentDeadlineType;
+  }
 
   todolist.push(newTodo);
   saveTodos();
@@ -68,17 +76,18 @@ function toggleUncomplete(todoId) {
   }
 }
 
-function setDeadLine(deadlineType) {
+function addDeadLine(deadlineType) {
   if (deadlineType === "setToday") {
     setDeadLine.src = "imgs/today.png";
-    // Other logic for setting the deadline...
+    currentDeadlineType = "Today";
   } else if (deadlineType === "setTomorrow") {
     setDeadLine.src = "imgs/tomorrow.png";
-    // Other logic for setting the deadline...
+    currentDeadlineType = "Tomorrow";
   } else if (deadlineType === "setNextWeek") {
     setDeadLine.src = "imgs/nextWeek.png";
-    // Other logic for setting the deadline...
+    currentDeadlineType = "Next Week";
   }
+
   deadlineModal.style.display = "none";
 }
 
@@ -184,7 +193,20 @@ showFinTodos.addEventListener("click", () => {
   }
 });
 
-setDate.addEventListener("click", () => {
-  const deadlineType = setDate.id;
-  setDeadLine(deadlineType);
+setToday.addEventListener("click", () => {
+  addDeadLine("setToday");
+});
+
+setTomorrow.addEventListener("click", () => {
+  addDeadLine("setTomorrow");
+});
+
+setNextWeek.addEventListener("click", () => {
+  addDeadLine("setNextWeek");
+});
+
+dModalTitle.addEventListener("click", () => {
+  setDeadLine.src = "imgs/deadline.png";
+  currentDeadlineType = "none";
+  deadlineModal.style.display = "none";
 });
