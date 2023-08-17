@@ -25,6 +25,9 @@ const priority2 = document.getElementById("p2");
 const priority3 = document.getElementById("p3");
 const priority4 = document.getElementById("p4");
 const countFinTodos = document.querySelector(".countFinTodos");
+const inboxClass = document.getElementById("inbox");
+const todayClass = document.getElementById("today");
+const importantClass = document.getElementById("important");
 
 let todolist = [];
 
@@ -133,6 +136,9 @@ function displayTodos() {
   todosUl.innerHTML = "";
   finTodoUl.innerHTML = "";
 
+  let inboxCount = 0;
+  let todayCount = 0;
+  let importantCount = 0;
   let finCount = 0;
 
   todolist.forEach((todo) => {
@@ -157,8 +163,20 @@ function displayTodos() {
         <div class="showDeadline">${todo.deadline}</div>
       `;
       todosUl.appendChild(li);
+
+      if (todo.deadline === "Today") {
+        todayCount++;
+      }
+      if (todo.priority === "p1") {
+        importantCount++;
+      }
+      inboxCount++;
     }
   });
+
+  inboxClass.querySelector(".todoClassCount").textContent = inboxCount;
+  todayClass.querySelector(".todoClassCount").textContent = todayCount;
+  importantClass.querySelector(".todoClassCount").textContent = importantCount;
 
   countFinTodos.textContent = finCount;
   displayDayOfWeek();
