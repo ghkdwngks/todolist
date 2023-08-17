@@ -59,7 +59,7 @@ ul {
 
 .todoApp {
   display: flex;
-  height: 90vh;
+  height: 100%;
 }
 
 .todoClass {
@@ -185,9 +185,7 @@ ul {
   font-size: 1.2rem;
 }
 
-.inboxContainer,
-.todayContainer,
-.importantContainer {
+.todoContainer {
   flex-grow: 1;
   margin: 1em;
 }

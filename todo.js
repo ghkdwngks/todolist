@@ -3,9 +3,6 @@ const todoClass = document.querySelector(".todoClass");
 const inboxDiv = document.getElementById("inbox");
 const todayDiv = document.getElementById("today");
 const importantDiv = document.getElementById("important");
-const inboxContainer = document.querySelector(".inboxContainer");
-const todayContainer = document.querySelector(".todayContainer");
-const importantContainer = document.querySelector(".importantContainer");
 const showAddOptions = document.querySelector(".showAddOptions");
 const addInput = document.querySelector(".addInput");
 const setButtons = document.querySelector(".setButtons");
@@ -23,6 +20,11 @@ const setToday = document.getElementById("setToday");
 const setTomorrow = document.getElementById("setTomorrow");
 const setNextWeek = document.getElementById("setNextWeek");
 const dModalTitle = document.querySelector(".dModalTitle");
+const priority1 = document.getElementById("p1");
+const priority2 = document.getElementById("p2");
+const priority3 = document.getElementById("p3");
+const priority4 = document.getElementById("p4");
+const countFinTodos = document.querySelector(".countFinTodos");
 
 let todolist = [];
 
@@ -39,12 +41,15 @@ function addTodo() {
     id: Date.now(),
     text: todoText,
     completed: false,
-    deadline: "none",
-    priority: "none",
+    deadline: "",
+    priority: "p4",
   };
 
   if (currentDeadlineType) {
     newTodo.deadline = currentDeadlineType;
+  }
+  if (currentPriorityType) {
+    newTodo.priority = currentPriorityType;
   }
 
   todolist.push(newTodo);
@@ -61,7 +66,7 @@ function saveTodos() {
 function toggleComplete(todoId) {
   const todoIndex = todolist.findIndex((todo) => todo.id === todoId);
   if (todoIndex !== -1) {
-    todolist[todoIndex].completed = !todolist[todoIndex].completed;
+    todolist[todoIndex].completed = true;
     saveTodos();
     displayTodos();
   }
@@ -91,31 +96,56 @@ function addDeadLine(deadlineType) {
   deadlineModal.style.display = "none";
 }
 
+function addPriority(priorityType) {
+  if (priorityType === "p1") {
+    setPriority.className = "p1img";
+    currentPriorityType = "p1";
+  } else if (priorityType === "p2") {
+    setPriority.className = "p2img";
+    currentPriorityType = "p2";
+  } else if (priorityType === "p3") {
+    setPriority.className = "p3img";
+    currentPriorityType = "p3";
+  } else if (priorityType === "p4") {
+    setPriority.className = "p4img";
+    currentPriorityType = "p4";
+  }
+
+  priorityModal.style.display = "none";
+}
+
 function displayTodos() {
   todosUl.innerHTML = "";
-  finTodoUl.innerHTML = ""; // Clear the finished todo list
+  finTodoUl.innerHTML = "";
+
+  let finCount = 0;
 
   todolist.forEach((todo) => {
     if (todo.completed) {
       const finLi = document.createElement("li");
       finLi.classList.add("todoItem");
       finLi.innerHTML = `
-        <div class="finCheckBox" onclick="toggleUncomplete(${todo.id})">
+        <div class="finCheckBox ${todo.priority}img" onclick="toggleUncomplete(${todo.id})">
           <img src="imgs/check.png" class="checkBoxImg" />
         </div>
         <div class="finTodoText">${todo.text}</div>
+        <div class="showDeadline">${todo.deadline}</div>
       `;
       finTodoUl.appendChild(finLi);
+      finCount++;
     } else {
       const li = document.createElement("li");
       li.classList.add("todoItem");
       li.innerHTML = `
-        <div class="checkBox" onclick="toggleComplete(${todo.id})"></div>
+        <div class="checkBox ${todo.priority}img" onclick="toggleComplete(${todo.id})"></div>
         <div class="todoText">${todo.text}</div>
+        <div class="showDeadline">${todo.deadline}</div>
       `;
       todosUl.appendChild(li);
     }
   });
+
+  countFinTodos.textContent = finCount;
 }
 
 addBtn.addEventListener("click", () => {
@@ -209,4 +239,20 @@ dModalTitle.addEventListener("click", () => {
   setDeadLine.src = "imgs/deadline.png";
   currentDeadlineType = "none";
   deadlineModal.style.display = "none";
+});
+
+priority1.addEventListener("click", () => {
+  addPriority("p1");
+});
+
+priority2.addEventListener("click", () => {
+  addPriority("p2");
+});
+
+priority3.addEventListener("click", () => {
+  addPriority("p3");
+});
+
+priority4.addEventListener("click", () => {
+  addPriority("p4");
 });
