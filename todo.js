@@ -137,6 +137,34 @@ function displayDayOfWeek() {
   document.getElementById("tomorrowDate").textContent = tomorrowDayOfWeek;
 }
 
+function displayTodayDate() {
+  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+  const months = [
+    "1월",
+    "2월",
+    "3월",
+    "4월",
+    "5월",
+    "6월",
+    "7월",
+    "8월",
+    "9월",
+    "10월",
+    "11월",
+    "12월",
+  ];
+
+  const today = new Date();
+
+  const dayOfWeek = daysOfWeek[today.getDay()];
+  const month = months[today.getMonth()];
+  const day = today.getDate();
+
+  const todayText = `${month} ${day}일 ${dayOfWeek}요일`;
+
+  document.querySelector(".today").textContent = todayText;
+}
+
 function displayTodos() {
   todosUl.innerHTML = "";
   finTodoUl.innerHTML = "";
@@ -186,6 +214,7 @@ function displayTodos() {
 
   countFinTodos.textContent = finCount;
   displayDayOfWeek();
+  displayTodayDate();
 }
 
 addBtn.addEventListener("click", () => {

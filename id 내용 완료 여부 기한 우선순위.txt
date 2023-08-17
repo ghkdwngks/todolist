@@ -1,0 +1,50 @@
+id 내용 완료 여부 기한 우선순위
+
+추가
+addBtn 클릭 시 addInput에 작성한 내용 localStorage와 list에 추가
+추가한 todo 불러와 todos ul 내부에 표시
+
+삭제
+
+완료
+checkBox 클릭 시 list에서 해당 todo의 complete값을 true로 변경, finTodoUl에 표시
+checkBox finCheckBox로 변경, finCheckBox 내부에 checkBoxImg 추가, todoText finTodoText로 변경
+
+기한
+setDate 클릭 시 id값에 따라 setDeadLine 이미지 변경, localStorage deadline 값 변경 모달창 none
+
+수정
+
+분류
+
+
+지금 할 일 18:00 30m
+- todo에 기한 우선순위 함께 표시 v
+: 내용 아래에 이미지와 글 함께 표시
+
+- todo 수정 기능 24:00 1h
+: todo 클릭 시 창 띄워 내용, 기한, 우선순위 수정
+
+- 개수 표시 16:00 v
+: 완료되지 않은 작업 개수, 완료된 작업 개수 v, 분류별 남은 개수 표시
+
+- 오늘 할 작업, 중요한 작업 분류 18:00 30m
+: 기한 오늘인 작업 today.html, 우선순위 1순위 작업 important.html 분류하여 표시
+
+- 날짜 표시 16:00 v
+: 오늘 날짜, 내일 날짜 표시
+
+- 검색 기능 24:00 1h
+: 검색어 입력 후 검색 버튼 클릭 시 해당 내용으로 todo 검색
+
+- 취소 버튼, 추가 버튼 16:00 v
+: 클릭 시 설정한 기한과 우선순위 초기화
+
+- 달력 24:00 1h
+: 기한 설정 시 달력 추가, 달력에서 날짜 선택
+
+- css 수정
+: 다듬기
+
+- js 수정
+: todo와 화면 표시 분리 또는 함수와 이벤트 리스너 위치 변경 등
