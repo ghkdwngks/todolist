@@ -117,6 +117,11 @@ function addPriority(priorityType) {
   priorityModal.style.display = "none";
 }
 
+function resetDeadlineAndPriority() {
+  setDeadLine.src = "imgs/deadline.png";
+  setPriority.className = "setPriority";
+}
+
 function displayDayOfWeek() {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -162,6 +167,7 @@ function displayTodos() {
         <div class="todoText">${todo.text}</div>
         <div class="showDeadline">${todo.deadline}</div>
       `;
+
       todosUl.appendChild(li);
 
       if (todo.deadline === "Today") {
@@ -187,6 +193,8 @@ addBtn.addEventListener("click", () => {
   setButtons.style.display = "none";
   deadlineModal.style.display = "none";
   priorityModal.style.display = "none";
+
+  resetDeadlineAndPriority();
 });
 
 todoMenu.addEventListener("click", () => {
@@ -245,6 +253,8 @@ cancelBtn.addEventListener("click", () => {
   setButtons.style.display = "none";
   deadlineModal.style.display = "none";
   priorityModal.style.display = "none";
+
+  resetDeadlineAndPriority();
 });
 
 showFinTodos.addEventListener("click", () => {
