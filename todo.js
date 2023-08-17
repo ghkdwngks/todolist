@@ -114,6 +114,21 @@ function addPriority(priorityType) {
   priorityModal.style.display = "none";
 }
 
+function displayDayOfWeek() {
+  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+
+  const today = new Date();
+  const tomorrow = new Date();
+
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const todayDayOfWeek = daysOfWeek[today.getDay()];
+  const tomorrowDayOfWeek = daysOfWeek[tomorrow.getDay()];
+
+  document.getElementById("todayDate").textContent = todayDayOfWeek;
+  document.getElementById("tomorrowDate").textContent = tomorrowDayOfWeek;
+}
+
 function displayTodos() {
   todosUl.innerHTML = "";
   finTodoUl.innerHTML = "";
@@ -146,6 +161,7 @@ function displayTodos() {
   });
 
   countFinTodos.textContent = finCount;
+  displayDayOfWeek();
 }
 
 addBtn.addEventListener("click", () => {
