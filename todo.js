@@ -41,7 +41,6 @@ let todolist = [];
 let editTodoId = null;
 let nowMonth = new Date();
 let today = new Date();
-today.setHours(0, 0, 0, 0);
 
 if (localStorage.getItem("todolist")) {
   todolist = JSON.parse(localStorage.getItem("todolist"));
@@ -224,6 +223,9 @@ function addDeadLine(deadlineType, month, day) {
   } else if (deadlineType === "setCalendarDate") {
     setDeadLine.src = "imgs/calendar.png";
     currentDeadlineType = `${month}월 ${day}일`;
+  } else if (deadlineType === "none") {
+    setDeadLine.src = "imgs/deadline.png";
+    currentDeadlineType = "";
   }
 
   deadlineModal.style.display = "none";
@@ -245,6 +247,30 @@ function addPriority(priorityType) {
   }
 
   priorityModal.style.display = "none";
+}
+
+function handleDeadLine() {
+  if (
+    deadlineModal.style.display === "none" ||
+    deadlineModal.style.display === ""
+  ) {
+    deadlineModal.style.display = "block";
+    priorityModal.style.display = "none";
+  } else {
+    deadlineModal.style.display = "none";
+  }
+}
+
+function handlePriority() {
+  if (
+    priorityModal.style.display === "none" ||
+    priorityModal.style.display === ""
+  ) {
+    priorityModal.style.display = "block";
+    deadlineModal.style.display = "none";
+  } else {
+    priorityModal.style.display = "none";
+  }
 }
 
 function resetDeadlineAndPriority() {
@@ -320,6 +346,29 @@ function closeEditModal() {
   editModal.style.display = "none";
   editTodoId = null;
 }
+function editTodos() {
+  const updatedText = editTaskText.value;
+  const updatedDeadline = editDeadlineSelect.value;
+  const updatedPriority = editPrioritySelect.value;
+
+  const todoIndex = todolist.findIndex((todo) => todo.id === editTodoId);
+  if (todoIndex !== -1) {
+    todolist[todoIndex].text = updatedText;
+    todolist[todoIndex].deadline = updatedDeadline;
+    todolist[todoIndex].priority = updatedPriority;
+    saveTodos();
+    displayTodos();
+    closeEditModal();
+  }
+}
+
+function handleTodoTextClick(event) {
+  const clickedElement = event.target;
+  if (clickedElement.classList.contains("todoText")) {
+    const todoId = Number(clickedElement.parentElement.dataset.todoId);
+    openEditModal(todoId);
+  }
+}
 
 function displayAllTodos() {
   displayTodos(todolist);
@@ -345,6 +394,16 @@ function searchTodos() {
     displayFilteredTodos(searchText);
   } else {
     displayTodos();
+  }
+}
+
+function handleFinTodos() {
+  if (finTodoUl.style.display === "none" || finTodoUl.style.display === "") {
+    finTodoUl.style.display = "block";
+    showFinTodos.innerText = "▽";
+  } else {
+    finTodoUl.style.display = "none";
+    showFinTodos.innerText = "▷";
   }
 }
 
@@ -490,143 +549,67 @@ function displayTodos(filteredTodos) {
   displayTodayDate();
 }
 
-addBtn.addEventListener("click", () => {
-  addTodo();
+function setDisplayNone() {
   setButtons.style.display = "none";
   deadlineModal.style.display = "none";
   priorityModal.style.display = "none";
+}
 
-  resetDeadlineAndPriority();
-});
-
-todoMenu.addEventListener("click", () => {
+function showClass() {
   if (todoClass.style.display === "none" || todoClass.style.display === "") {
     todoClass.style.display = "block";
   } else {
     todoClass.style.display = "none";
   }
-});
+}
 
+function hideSetButtons() {
+  setButtons.style.display = "flex";
+}
+
+addBtn.addEventListener("click", () => {
+  addTodo(), setDisplayNone(), resetDeadlineAndPriority();
+});
+todoMenu.addEventListener("click", showClass);
 inboxDiv.addEventListener("click", () => {
   window.location.href = "index.html";
 });
-
 todayDiv.addEventListener("click", () => {
   window.location.href = "today.html";
 });
-
 importantDiv.addEventListener("click", () => {
   window.location.href = "important.html";
 });
-
-showAddOptions.addEventListener("click", () => {
-  setButtons.style.display = "flex";
-});
-
-addInput.addEventListener("focus", () => {
-  setButtons.style.display = "flex";
-});
-
-setDeadLine.addEventListener("click", () => {
-  if (
-    deadlineModal.style.display === "none" ||
-    deadlineModal.style.display === ""
-  ) {
-    deadlineModal.style.display = "block";
-    priorityModal.style.display = "none";
-  } else {
-    deadlineModal.style.display = "none";
-  }
-});
-
-setPriority.addEventListener("click", () => {
-  if (
-    priorityModal.style.display === "none" ||
-    priorityModal.style.display === ""
-  ) {
-    priorityModal.style.display = "block";
-    deadlineModal.style.display = "none";
-  } else {
-    priorityModal.style.display = "none";
-  }
-});
-
-cancelBtn.addEventListener("click", () => {
-  setButtons.style.display = "none";
-  deadlineModal.style.display = "none";
-  priorityModal.style.display = "none";
-
-  resetDeadlineAndPriority();
-});
-
-showFinTodos.addEventListener("click", () => {
-  if (finTodoUl.style.display === "none" || finTodoUl.style.display === "") {
-    finTodoUl.style.display = "block";
-    showFinTodos.innerText = "▽";
-  } else {
-    finTodoUl.style.display = "none";
-    showFinTodos.innerText = "▷";
-  }
-});
-
+showAddOptions.addEventListener("click", hideSetButtons);
+addInput.addEventListener("focus", hideSetButtons);
+setDeadLine.addEventListener("click", handleDeadLine);
+setPriority.addEventListener("click", handlePriority);
+cancelBtn.addEventListener("click", setDisplayNone, resetDeadlineAndPriority);
+showFinTodos.addEventListener("click", handleFinTodos);
 setToday.addEventListener("click", () => {
   addDeadLine("setToday");
 });
-
 setTomorrow.addEventListener("click", () => {
   addDeadLine("setTomorrow");
 });
-
 setNextWeek.addEventListener("click", () => {
   addDeadLine("setNextWeek");
 });
-
 dModalTitle.addEventListener("click", () => {
-  setDeadLine.src = "imgs/deadline.png";
-  currentDeadlineType = "";
-  deadlineModal.style.display = "none";
+  addDeadLine("none");
 });
-
 priority1.addEventListener("click", () => {
   addPriority("p1");
 });
-
 priority2.addEventListener("click", () => {
   addPriority("p2");
 });
-
 priority3.addEventListener("click", () => {
   addPriority("p3");
 });
-
 priority4.addEventListener("click", () => {
   addPriority("p4");
 });
-
-cancelEditBtn.addEventListener("click", () => {
-  closeEditModal();
-});
-
-saveEditBtn.addEventListener("click", () => {
-  const updatedText = editTaskText.value;
-  const updatedDeadline = editDeadlineSelect.value;
-  const updatedPriority = editPrioritySelect.value;
-
-  const todoIndex = todolist.findIndex((todo) => todo.id === editTodoId);
-  if (todoIndex !== -1) {
-    todolist[todoIndex].text = updatedText;
-    todolist[todoIndex].deadline = updatedDeadline;
-    todolist[todoIndex].priority = updatedPriority;
-    saveTodos();
-    displayTodos();
-    closeEditModal();
-  }
-});
-
-todosUl.addEventListener("click", (event) => {
-  const clickedElement = event.target;
-  if (clickedElement.classList.contains("todoText")) {
-    const todoId = Number(clickedElement.parentElement.dataset.todoId);
-    openEditModal(todoId);
-  }
-});
+cancelEditBtn.addEventListener("click", closeEditModal);
+saveEditBtn.addEventListener("click", editTodos);
+todosUl.addEventListener("click", handleTodoTextClick);
