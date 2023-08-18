@@ -278,29 +278,7 @@ function resetDeadlineAndPriority() {
   setPriority.className = "setPriority";
 }
 
-function displayDayOfWeek() {
-  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-
-  const today = new Date();
-  const tomorrow = new Date();
-  const nextMonday = new Date(today);
-
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  nextMonday.setDate(today.getDate() + ((1 + 7 - today.getDay()) % 7));
-
-  const todayDayOfWeek = daysOfWeek[today.getDay()];
-  const tomorrowDayOfWeek = daysOfWeek[tomorrow.getDay()];
-  const nextMondayMonth = nextMonday.getMonth() + 1;
-  const nextMondayDay = nextMonday.getDate();
-
-  document.getElementById("todayDate").textContent = todayDayOfWeek;
-  document.getElementById("tomorrowDate").textContent = tomorrowDayOfWeek;
-  document.getElementById(
-    "nextWeekDate"
-  ).textContent = `월 ${nextMondayMonth}월 ${nextMondayDay}일`;
-}
-
-function displayTodayDate() {
+function displayDateInfo() {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
   const months = [
     "1월",
@@ -318,6 +296,16 @@ function displayTodayDate() {
   ];
 
   const today = new Date();
+  const tomorrow = new Date();
+  const nextMonday = new Date(today);
+
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  nextMonday.setDate(today.getDate() + ((1 + 7 - today.getDay()) % 7));
+
+  const todayDayOfWeek = daysOfWeek[today.getDay()];
+  const tomorrowDayOfWeek = daysOfWeek[tomorrow.getDay()];
+  const nextMondayMonth = nextMonday.getMonth() + 1;
+  const nextMondayDay = nextMonday.getDate();
 
   const dayOfWeek = daysOfWeek[today.getDay()];
   const month = months[today.getMonth()];
@@ -329,6 +317,12 @@ function displayTodayDate() {
   if (todayElement) {
     todayElement.textContent = todayText;
   }
+
+  document.getElementById("todayDate").textContent = todayDayOfWeek;
+  document.getElementById("tomorrowDate").textContent = tomorrowDayOfWeek;
+  document.getElementById(
+    "nextWeekDate"
+  ).textContent = `월 ${nextMondayMonth}월 ${nextMondayDay}일`;
 }
 
 function openEditModal(todoId) {
@@ -545,8 +539,7 @@ function displayTodos(filteredTodos) {
   importantClass.querySelector(".todoClassCount").textContent = importantCount;
 
   countFinTodos.textContent = finCount;
-  displayDayOfWeek();
-  displayTodayDate();
+  displayDateInfo();
 }
 
 function setDisplayNone() {
