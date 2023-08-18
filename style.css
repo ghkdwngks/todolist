@@ -89,7 +89,7 @@ ul {
   display: none;
   position: absolute;
   z-index: 10;
-  width: 10vw;
+  width: 250px;
   background-color: white;
   border: 1px solid #cccccc;
 }
@@ -101,7 +101,7 @@ ul {
 }
 
 .selectDL {
-  margin: 0.5vh 0 2vh 0;
+  margin: 0.5vh 0 1vh 0;
   border-top: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
 }
@@ -126,8 +126,58 @@ ul {
   font-size: 1.2rem;
 }
 
-.deadlineCalendar {
+.Calendar {
+  text-align: center;
   width: 100%;
+  max-width: 250px;
+}
+
+.Calendar > thead > tr:first-child > td {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.Calendar > thead > tr:last-child > td {
+  font-weight: 600;
+}
+
+.Calendar > tbody > tr > td > p {
+  font-size: 1em;
+  height: 25px;
+  width: 25px;
+  border-radius: 45px;
+  transition-duration: 0.2s;
+  line-height: 25px;
+  margin: 2.5px;
+  display: block;
+  text-align: center;
+}
+
+.pastDay {
+  color: lightgray;
+}
+
+.today {
+  background-color: #00489c;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.futureDay {
+  background-color: #ffffff;
+  cursor: pointer;
+}
+.futureDay:hover {
+  background: #eee;
+}
+
+.futureDay.choiceDay,
+.today.choiceDay {
+  background: #0a174e;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .priorityModal {
@@ -185,6 +235,64 @@ ul {
   font-size: 1.2rem;
 }
 
+/* Edit Modal Styles */
+.editModal {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #cccccc;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1000;
+  max-width: 200px;
+  width: 90%;
+}
+
+.editTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.editTaskText,
+.editDeadlineSelect,
+.editPrioritySelect {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 1rem;
+}
+
+.editButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.editButtons button {
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancelEditBtn {
+  background-color: #f0f0f0;
+}
+
+.saveEditBtn {
+  background-color: #00489c;
+  color: white;
+}
+
 .todoContainer {
   flex-grow: 1;
   margin: 1em;
@@ -205,7 +313,7 @@ ul {
   margin-right: 1vw;
 }
 
-.today {
+.todayDate {
   margin-top: 10px;
   font-size: 1.2rem;
   font-weight: normal;

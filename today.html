@@ -45,7 +45,7 @@
             <img src="imgs/today.png" class="inboxImg" />
             <div class="inboxTitle">오늘 할 작업</div>
           </div>
-          <div class="today"></div>
+          <div class="todayDate"></div>
         </div>
         <div class="addTodo">
           <div class="showAddTodo">
@@ -77,11 +77,36 @@
             <div class="setDate" id="setNextWeek">
               <img src="imgs/nextWeek.png" class="deadlineImg" />
               <div class="deadlineText">다음 주</div>
-              <div class="deadlineDate" id="nextWeekDate">월</div>
+              <div class="deadlineDate" id="nextWeekDate"></div>
             </div>
           </div>
           <div class="calendar">
-            <img src="imgs/calendar.png" class="deadlineCalendar" />
+            <table class="Calendar">
+              <thead>
+                <tr>
+                  <td onClick="prevCalendar();" style="cursor: pointer">
+                    &#60;
+                  </td>
+                  <td colspan="5">
+                    <span id="calYear"></span>년 <span id="calMonth"></span>월
+                  </td>
+                  <td onClick="nextCalendar();" style="cursor: pointer">
+                    &#62;
+                  </td>
+                </tr>
+                <tr>
+                  <td>일</td>
+                  <td>월</td>
+                  <td>화</td>
+                  <td>수</td>
+                  <td>목</td>
+                  <td>금</td>
+                  <td>토</td>
+                </tr>
+              </thead>
+
+              <tbody></tbody>
+            </table>
           </div>
         </div>
         <div class="priorityModal">
@@ -105,6 +130,34 @@
             </div>
           </div>
         </div>
+        <div class="editModal">
+          <div class="editTitle">작업 수정</div>
+          <input
+            type="text"
+            class="editTaskText"
+            placeholder="Edit task text"
+          />
+          <div class="editDeadline">
+            <select class="editDeadlineSelect">
+              <option value="오늘">오늘</option>
+              <option value="내일">내일</option>
+              <option value="다음 주">다음 주</option>
+              <option value="">X</option>
+            </select>
+          </div>
+          <div class="editPriority">
+            <select class="editPrioritySelect">
+              <option value="p1">우선순위 1</option>
+              <option value="p2">우선순위 2</option>
+              <option value="p3">우선순위 3</option>
+              <option value="p4">우선순위 4</option>
+            </select>
+          </div>
+          <div class="editButtons">
+            <button class="cancelEditBtn">취소</button>
+            <button class="saveEditBtn">저장</button>
+          </div>
+        </div>
         <div class="todoList">
           <section class="nowTodos">
             <ul class="todos"></ul>
@@ -113,7 +166,7 @@
             <div class="finInfo">
               <button class="showFinTodos">▷</button>
               <div class="finText">완료됨</div>
-              <div class="countFinTodos">1</div>
+              <div class="countFinTodos">0</div>
             </div>
             <ul class="finTodoUl"></ul>
           </section>
