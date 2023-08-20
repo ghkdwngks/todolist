@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -39,14 +39,27 @@
           <div class="todoClassCount">0</div>
         </div>
       </nav>
-      <div class="todoContainer" id="inbox">
-        <div class="todoType">
+      <div class="todoContainer">
+        <div class="todoType" id="inboxType">
           <div class="todoInbox">
-            <img src="imgs/inbox.png" class="inboxImg" />
+            <img src="imgs/inbox.png" class="todoTypeImg" />
             <div class="inboxTitle">작업 관리</div>
           </div>
         </div>
-        <div class="addTodo">
+        <div class="todoType" id="todayType">
+          <div class="todoInbox">
+            <img src="imgs/today.png" class="todoTypeImg" />
+            <div class="inboxTitle">오늘 할 작업</div>
+          </div>
+          <div class="todayDate"></div>
+        </div>
+        <div class="todoType" id="importantType">
+          <div class="todoInbox">
+            <img src="imgs/important.png" class="todoTypeImg" />
+            <div class="inboxTitle">중요한 작업</div>
+          </div>
+        </div>
+        <div class="addTodoDiv">
           <div class="showAddTodo">
             <button class="showAddOptions">+</button>
             <input type="text" class="addInput" placeholder="작업 추가" />
@@ -129,7 +142,10 @@
           </div>
         </div>
         <div class="editModal">
-          <div class="editTitle">작업 수정</div>
+          <div class="editModalHeader">
+            <div class="editTitle">작업 수정</div>
+            <div class="delBtn">X</div>
+          </div>
           <input
             type="text"
             class="editTaskText"
@@ -140,8 +156,10 @@
               <option value="오늘">오늘</option>
               <option value="내일">내일</option>
               <option value="다음 주">다음 주</option>
+              <option value="직접 입력">직접 입력</option>
               <option value="">X</option>
             </select>
+            <input type="date" class="directDateInput" />
           </div>
           <div class="editPriority">
             <select class="editPrioritySelect">

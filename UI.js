@@ -1,3 +1,15 @@
+import {
+  addTodo,
+  saveTodos,
+  deleteTodo,
+  toggleComplete,
+  toggleUncomplete,
+  getAllTodos,
+  getTodayTodos,
+  getImportantTodos,
+  searchTodos,
+} from "./todoList.js";
+
 const todoMenu = document.querySelector(".todoMenu");
 const todoClass = document.querySelector(".todoClass");
 
@@ -49,102 +61,17 @@ const editModal = document.querySelector(".editModal");
 const editTaskText = document.querySelector(".editTaskText");
 const editDeadlineSelect = document.querySelector(".editDeadlineSelect");
 const editPrioritySelect = document.querySelector(".editPrioritySelect");
-const directDateInput = document.querySelector(".directDateInput");
 const cancelEditBtn = document.querySelector(".cancelEditBtn");
 const saveEditBtn = document.querySelector(".saveEditBtn");
 
 const searchInput = document.querySelector(".searchInput");
 const searchImg = document.querySelector(".searchImg");
 
-let todolist = [];
-let editTodoId = null;
 let nowMonth = new Date();
 let today = new Date();
 
 let currentClass = "inbox";
 const setCurrentClass = (newClass) => (currentClass = newClass);
-
-if (localStorage.getItem("todolist")) {
-  todolist = JSON.parse(localStorage.getItem("todolist"));
-  displayTodos();
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  showType("inboxType");
-});
-
-function addTodo() {
-  const todoText = addInput.value;
-  if (todoText === "") return;
-
-  const setId = Date.now();
-
-  const newTodo = {
-    id: setId,
-    text: todoText,
-    completed: false,
-    deadline: "",
-    deadlineImg: "",
-    priority: "p4",
-  };
-
-  if (currentDeadlineType) {
-    newTodo.deadline = currentDeadlineType;
-  }
-
-  if (newTodo.deadline !== "") {
-    if (setDeadLine.src) {
-      newTodo.deadlineImg = setDeadLine.src;
-    }
-  }
-
-  if (currentPriorityType) {
-    newTodo.priority = currentPriorityType;
-  }
-
-  todolist.push(newTodo);
-  saveTodos();
-  displayTodos();
-
-  addInput.value = "";
-}
-
-function saveTodos() {
-  localStorage.setItem("todolist", JSON.stringify(todolist));
-}
-
-function deleteTodo() {
-  const confirmation = confirm("정말 삭제하시겠습니까?");
-  if (confirmation) {
-    if (editTodoId !== null) {
-      const todoIndex = todolist.findIndex((todo) => todo.id === editTodoId);
-      if (todoIndex !== -1) {
-        todolist.splice(todoIndex, 1);
-        saveTodos();
-        displayTodos();
-        closeEditModal();
-      }
-    }
-  }
-}
-
-function toggleComplete(todoId) {
-  const todoIndex = todolist.findIndex((todo) => todo.id === todoId);
-  if (todoIndex !== -1) {
-    todolist[todoIndex].completed = true;
-    saveTodos();
-    displayTodos();
-  }
-}
-
-function toggleUncomplete(todoId) {
-  const todoIndex = todolist.findIndex((todo) => todo.id === todoId);
-  if (todoIndex !== -1) {
-    todolist[todoIndex].completed = false;
-    saveTodos();
-    displayTodos();
-  }
-}
 
 function buildCalendar() {
   let firstDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth(), 1);
@@ -371,56 +298,11 @@ function editTodos() {
   const todoIndex = todolist.findIndex((todo) => todo.id === editTodoId);
   if (todoIndex !== -1) {
     todolist[todoIndex].text = updatedText;
-
-    if (updatedDeadline === "직접 입력") {
-      const directDate = directDateInput.value;
-      if (directDate) {
-        const selectedDate = new Date(directDate);
-        const selectedMonth = selectedDate.getMonth() + 1;
-        const selectedDay = selectedDate.getDate();
-
-        todolist[todoIndex].deadline = `${selectedMonth}월 ${selectedDay}일`;
-      }
-      todolist[todoIndex].deadlineImg = "imgs/calendar.png";
-    } else {
-      todolist[todoIndex].deadline = updatedDeadline;
-      if (updatedDeadline === "오늘") {
-        todolist[todoIndex].deadlineImg = "imgs/today.png";
-      } else if (updatedDeadline === "내일") {
-        todolist[todoIndex].deadlineImg = "imgs/tomorrow.png";
-      } else if (updatedDeadline === "다음 주") {
-        todolist[todoIndex].deadlineImg = "imgs/nextWeek.png";
-      } else if (updatedDeadline === "") {
-        todolist[todoIndex].deadlineImg = "";
-      }
-    }
-
+    todolist[todoIndex].deadline = updatedDeadline;
     todolist[todoIndex].priority = updatedPriority;
     saveTodos();
     displayTodos();
     closeEditModal();
-  }
-}
-
-function showDirectDateInput() {
-  const selectedValue = this.value;
-  if (selectedValue === "직접 입력") {
-    directDateInput.style.display = "block";
-  } else {
-    directDateInput.style.display = "none";
-  }
-}
-
-function handleDirectDateInput() {
-  const selectedDate = directDateInput.value;
-  if (selectedDate) {
-    const formattedDate = `${
-      new Date(selectedDate).getMonth() + 1
-    }월 ${new Date(selectedDate).getDate()}일`;
-
-    editDeadlineSelect.options[editDeadlineSelect.selectedIndex].text =
-      formattedDate;
-    directDateInput.style.display = "none";
   }
 }
 
@@ -433,31 +315,15 @@ function handleTodoTextClick(event) {
 }
 
 function showType(typeToShow) {
-  const types = ["inboxType", "todayType", "importantType"];
+  const types = [inboxType, todayType, importantType];
 
   types.forEach((type) => {
-    const typeElement = document.getElementById(type);
     if (type === typeToShow) {
-      typeElement.style.display = "block";
+      type.style.display = "block";
     } else {
-      typeElement.style.display = "none";
+      type.style.display = "none";
     }
   });
-
-  setCurrentClass(typeToShow);
-  displayTodos();
-}
-
-function getAllTodos() {
-  return todolist;
-}
-
-function getTodayTodos() {
-  return todolist.filter((todo) => todo.deadline === "오늘");
-}
-
-function getImportantTodos() {
-  return todolist.filter((todo) => todo.priority === "p1");
 }
 
 function handleFinTodos() {
@@ -470,31 +336,15 @@ function handleFinTodos() {
   }
 }
 
-function searchTodos() {
-  const searchTerm = searchInput.value.trim().toLowerCase();
-
-  const filteredTodos = todolist.filter((todo) =>
-    todo.text.toLowerCase().includes(searchTerm)
-  );
-
-  displaySearchResults(filteredTodos);
-}
-
 function displaySearchResults(filteredTodos) {
   todosUl.innerHTML = "";
   finTodoUl.innerHTML = "";
 
-  let finCount = 0;
-
   filteredTodos.forEach((todo) => {
     paintTodo(todo);
-
-    if (todo.completed) {
-      finCount++;
-    }
   });
 
-  countFinTodos.textContent = finCount;
+  updateTodoCounts();
 
   const todoTypeImg = document.querySelector(".todoTypeImg");
   const inboxTitle = document.querySelector(".inboxTitle");
@@ -518,21 +368,21 @@ function paintTodo(todo) {
     const finLi = document.createElement("li");
     finLi.classList.add("todoItem");
     finLi.innerHTML = `
-        <div class="finCheckBox ${
-          todo.priority
-        }img" onclick="toggleUncomplete(${todo.id})">
-          <img src="imgs/check.png" class="checkBoxImg" />
-        </div>
-        <div class="finTodoText">${todo.text}</div>
-        <div class="todoDeadLine">
-        ${
-          todo.deadlineImg
-            ? `<img class="deadlineImg" src="${todo.deadlineImg}" />`
-            : ""
-        }
-        <div class="showDeadline">${todo.deadline}</div>
-        </div>
-      `;
+          <div class="finCheckBox ${
+            todo.priority
+          }img" onclick="toggleUncomplete(${todo.id})">
+            <img src="imgs/check.png" class="checkBoxImg" />
+          </div>
+          <div class="finTodoText">${todo.text}</div>
+          <div class="todoDeadLine">
+          ${
+            todo.deadlineImg
+              ? `<img class="deadlineImg" src="${todo.deadlineImg}" />`
+              : ""
+          }
+          <div class="showDeadline">${todo.deadline}</div>
+          </div>
+        `;
 
     finTodoUl.appendChild(finLi);
   } else {
@@ -541,19 +391,19 @@ function paintTodo(todo) {
     li.dataset.todoId = todo.id;
 
     li.innerHTML = `
-        <div class="checkBox ${todo.priority}img" onclick="toggleComplete(${
+          <div class="checkBox ${todo.priority}img" onclick="toggleComplete(${
       todo.id
     })"></div>
-        <div class="todoText">${todo.text}</div>
-        <div class="todoDeadLine">
-        ${
-          todo.deadlineImg
-            ? `<img class="deadlineImg" src="${todo.deadlineImg}" />`
-            : ""
-        }
-        <div class="showDeadline">${todo.deadline}</div>
-        </div>
-      `;
+          <div class="todoText">${todo.text}</div>
+          <div class="todoDeadLine">
+          ${
+            todo.deadlineImg
+              ? `<img class="deadlineImg" src="${todo.deadlineImg}" />`
+              : ""
+          }
+          <div class="showDeadline">${todo.deadline}</div>
+          </div>
+        `;
 
     todosUl.appendChild(li);
   }
@@ -603,13 +453,13 @@ function displayTodos() {
   let filteredTodos = [];
 
   switch (currentClass) {
-    case "inboxType":
+    case "inbox":
       filteredTodos = getAllTodos();
       break;
-    case "todayType":
+    case "today":
       filteredTodos = getTodayTodos();
       break;
-    case "importantType":
+    case "important":
       filteredTodos = getImportantTodos();
       break;
     default:
@@ -644,15 +494,18 @@ function init() {
   todoMenu.addEventListener("click", showClassMenu);
 
   inboxDiv.addEventListener("click", () => {
-    showType("inboxType");
+    showType(inboxType);
+    getAllTodos();
   });
 
   todayDiv.addEventListener("click", () => {
-    showType("todayType");
+    showType(todayType);
+    getTodayTodos();
   });
 
   importantDiv.addEventListener("click", () => {
-    showType("importantType");
+    showType(importantType);
+    getImportantTodos();
   });
 
   searchImg.addEventListener("click", searchTodos);
@@ -661,11 +514,7 @@ function init() {
   addInput.addEventListener("focus", hideSetButtons);
   setDeadLine.addEventListener("click", handleDeadLine);
   setPriority.addEventListener("click", handlePriority);
-
-  cancelBtn.addEventListener("click", () => {
-    setDisplayNone();
-    resetDeadlineAndPriority();
-  });
+  cancelBtn.addEventListener("click", setDisplayNone, resetDeadlineAndPriority);
   showFinTodos.addEventListener("click", handleFinTodos);
   setToday.addEventListener("click", () => {
     addDeadLine("setToday");
@@ -692,12 +541,9 @@ function init() {
     addPriority("p4");
   });
   cancelEditBtn.addEventListener("click", closeEditModal);
-  editDeadlineSelect.addEventListener("change", showDirectDateInput);
-
-  directDateInput.addEventListener("change", handleDirectDateInput);
   saveEditBtn.addEventListener("click", editTodos);
   todosUl.addEventListener("click", handleTodoTextClick);
   buildCalendar();
 }
 
-init();
+export { init, displayTodos };

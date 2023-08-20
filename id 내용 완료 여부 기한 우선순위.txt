@@ -48,3 +48,127 @@ setDate 클릭 시 id값에 따라 setDeadLine 이미지 변경, localStorage de
 
 - js 수정 
 : todo와 화면 표시 분리 또는 함수와 이벤트 리스너 위치 변경 등
+
+function displayTodo(todo) {
+  const todoItem = document.createElement("li");
+  todoItem.classList.add("todoItem");
+  todoItem.dataset.todoId = todo.id;
+
+  const checkBox = document.createElement("div");
+  checkBox.classList.add("checkBox", `${todo.priority}img`);
+  checkBox.addEventListener("click", () => toggleComplete(todo.id));
+
+  const todoText = document.createElement("div");
+  todoText.classList.add("todoText");
+  todoText.innerText = todo.text;
+  todoText.addEventListener("click", () => openEditModal(todo.id));
+
+  const showDeadline = document.createElement("div");
+  showDeadline.classList.add("showDeadline");
+  showDeadline.innerText = todo.deadline;
+
+  todoItem.appendChild(checkBox);
+  todoItem.appendChild(todoText);
+  todoItem.appendChild(showDeadline);
+
+  if (todo.deadlineImg && todo.deadlineImg !== "") {
+    const setDeadLineImg = document.createElement("img");
+    setDeadLineImg.className = "setDeadLine";
+    setDeadLineImg.src = todo.deadlineImg;
+    todoItem.appendChild(setDeadLineImg);
+  }
+
+  if (todo.completed) {
+    finTodoUl.appendChild(todoItem);
+  } else {
+    todosUl.appendChild(todoItem);
+  }
+
+  updateTodoCounts();
+  displayDateInfo();
+}
+
+function updateTodoCounts() {
+  const inboxCount = todolist.filter((todo) => !todo.completed).length;
+  const todayCount = todolist.filter(
+    (todo) => todo.deadline === "오늘" && !todo.completed
+  ).length;
+  const importantCount = todolist.filter(
+    (todo) => todo.priority === "p1" && !todo.completed
+  ).length;
+  const finCount = todolist.filter((todo) => todo.completed).length;
+
+  inboxClass.querySelector(".todoClassCount").textContent = inboxCount;
+  todayClass.querySelector(".todoClassCount").textContent = todayCount;
+  importantClass.querySelector(".todoClassCount").textContent = importantCount;
+  countFinTodos.textContent = finCount;
+}
+
+function displayTodo(todo) {
+  if (!todo) {
+    return;
+  }
+
+  let inboxCount = 0;
+  let todayCount = 0;
+  let importantCount = 0;
+  let finCount = 0;
+
+  todo.forEach((todo) => {
+    if (todo.completed) {
+      const finLi = document.createElement("li");
+      finLi.classList.add("todoItem");
+      finLi.innerHTML = `
+        <div class="finCheckBox ${todo.priority}img" onclick="toggleUncomplete(${todo.id})">
+          <img src="imgs/check.png" class="checkBoxImg" />
+        </div>
+        <div class="finTodoText">${todo.text}</div>
+        <div class="showDeadline">${todo.deadline}</div>
+      `;
+
+      if (todo.deadlineImg && todo.deadlineImg !== "") {
+        const setDeadLineImg = document.createElement("img");
+        setDeadLineImg.className = "setDeadLine";
+        setDeadLineImg.src = todo.deadlineImg;
+        finLi.appendChild(setDeadLineImg);
+      }
+
+      finTodoUl.appendChild(finLi);
+      finCount++;
+    } else {
+      const li = document.createElement("li");
+      li.classList.add("todoItem");
+      li.dataset.todoId = todo.id;
+
+      li.innerHTML = `
+        <div class="checkBox ${todo.priority}img" onclick="toggleComplete(${todo.id})"></div>
+        <div class="todoText">${todo.text}</div>
+        <div class="showDeadline">${todo.deadline}</div>
+      `;
+
+      if (todo.deadlineImg && todo.deadlineImg !== "") {
+        const setDeadLineImg = document.createElement("img");
+        setDeadLineImg.className = "setDeadLine";
+        setDeadLineImg.src = todo.deadlineImg;
+        li.appendChild(setDeadLineImg);
+      }
+
+      todosUl.appendChild(li);
+
+      if (todo.deadline === "오늘") {
+        todayCount++;
+      }
+      if (todo.priority === "p1") {
+        importantCount++;
+      }
+      inboxCount++;
+    }
+  });
+
+  inboxClass.querySelector(".todoClassCount").textContent = inboxCount;
+  todayClass.querySelector(".todoClassCount").textContent = todayCount;
+  importantClass.querySelector(".todoClassCount").textContent = importantCount;
+
+  countFinTodos.textContent = finCount;
+  displayDateInfo();
+}
