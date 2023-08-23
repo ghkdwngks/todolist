@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <img src="imgs/hamburgerMenu.png" class="todoMenu" />
+      <div class="todoTitle">TodoList</div>
+      <div class="search">
+        <input type="text" class="searchInput" placeholder="검색어 입력" />
+        <img src="imgs/search.png" class="searchImg" />
+      </div>
+    </header>
+    <div class="todoApp">
+      <nav class="todoClass">
+        <div class="todoClassDiv" id="inbox">
+          <div class="todoClassImg">
+            <img src="imgs/inbox.png" />
+          </div>
+          <div class="todoClassText">작업 관리</div>
+          <div class="todoClassCount">0</div>
+        </div>
+      </nav>
+      <div class="todoContainer">
+        <div class="todoType" id="inboxType">
+          <div class="todoInbox">
+            <img src="imgs/inbox.png" class="todoTypeImg" />
+            <div class="inboxTitle">작업 관리</div>
+          </div>
+        </div>
+        <div class="addTodoDiv">
+          <div class="showAddTodo">
+            <button class="showAddOptions">+</button>
+            <input type="text" class="addInput" placeholder="작업 추가" />
+          </div>
+          <div class="setButtons">
+            <img src="imgs/deadline.png" class="setDeadLine" />
+            <img src="imgs/priority.png" class="setPriority" />
+            <div class="addButtons">
+              <button class="cancelBtn">취소</button>
+              <button class="addBtn">추가</button>
+            </div>
+          </div>
+        </div>
+        <div class="deadlineModal"></div>
+        <div class="priorityModal"></div>
+        <div class="editModal"></div>
+        <div class="todoList">
+          <section class="nowTodos">
+            <ul class="todos"></ul>
+          </section>
+          <section class="finTodos">
+            <div class="finInfo">
+              <button class="showFinTodos">▷</button>
+              <div class="finText">완료됨</div>
+              <div class="countFinTodos">0</div>
+            </div>
+            <ul class="finTodoUl"></ul>
+          </section>
+        </div>
+        addTodo saveTodos deleteTodo toggleComplete toggleUncomplete
+        getTodayTodos getImportantTodos editTodos getAllTodos
+      </div>
+    </div>
+    <script src="js/todo.js"></script>
+  </body>
+</html>
