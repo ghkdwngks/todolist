@@ -6,6 +6,8 @@ export class Todo {
     this.deadlineImg = deadlineImg;
     this.priority = priority;
     this.isCompleted = isCompleted;
+
+    this.todolist = [];
   }
 
   addTodo() {
@@ -37,9 +39,8 @@ export class Todo {
       newTodo.priority = currentPriorityType;
     }
 
-    todolist.push(newTodo);
-    saveTodos();
-    displayTodos();
+    this.todolist.push(newTodo);
+    this.saveTodos();
 
     addInput.value = "";
   }
@@ -48,36 +49,19 @@ export class Todo {
     localStorage.setItem("todolist", JSON.stringify(todolist));
   }
 
-  deleteTodo() {
-    const confirmation = confirm("정말 삭제하시겠습니까?");
-    if (confirmation) {
-      if (editTodoId !== null) {
-        const todoIndex = todolist.findIndex((todo) => todo.id === editTodoId);
-        if (todoIndex !== -1) {
-          todolist.splice(todoIndex, 1);
-          saveTodos();
-          displayTodos();
-          closeEditModal();
-        }
-      }
-    }
-  }
-
   toggleComplete(todoId) {
     const todoIndex = todolist.findIndex((todo) => todo.id === todoId);
     if (todoIndex !== -1) {
-      todolist[todoIndex].completed = true;
+      this.todolist[todoIndex].isCompleted = true;
       saveTodos();
-      displayTodos();
     }
   }
 
   toggleUncomplete(todoId) {
     const todoIndex = todolist.findIndex((todo) => todo.id === todoId);
     if (todoIndex !== -1) {
-      todolist[todoIndex].completed = false;
+      this.todolist[todoIndex].isCompleted = false;
       saveTodos();
-      displayTodos();
     }
   }
 }
