@@ -1,4 +1,4 @@
-import { init, displayTodos } from "./UI.js";
+import { init, displayTodos } from "./UIManager.js";
 
 init();
 
