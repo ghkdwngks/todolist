@@ -1,1 +1,1 @@
-import Todo from "./todoList.js";
+import { Todo, TodoList } from "./todoList.js";

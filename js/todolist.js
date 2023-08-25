@@ -1,4 +1,4 @@
-export class Todo {
+class Todo {
   constructor(id, content, deadline, deadlineImg, priority, isCompleted) {
     this.id = id;
     this.content = content;
@@ -6,8 +6,22 @@ export class Todo {
     this.deadlineImg = deadlineImg;
     this.priority = priority;
     this.isCompleted = isCompleted;
+  }
+}
 
+class TodoList {
+  constructor() {
     this.todolist = [];
+    this.loadTodos();
+  }
+
+  loadTodos() {
+    const savedTodos = localStorage.getItem("todolist");
+    if (savedTodos) {
+      this.todolist = JSON.parse(savedTodos);
+    } else {
+      this.todolist = [];
+    }
   }
 
   addTodo() {
@@ -65,3 +79,5 @@ export class Todo {
     }
   }
 }
+
+export { Todo, TodoList };

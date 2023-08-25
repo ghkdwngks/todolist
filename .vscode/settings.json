@@ -1,5 +1,6 @@
 {
   "editor.fontSize": 15,
   "editor.fontLigatures": false,
-  "editor.fontFamily": "Consolas, 'Courier New', monospace"
+  "editor.fontFamily": "Consolas, 'Courier New', monospace",
+  "liveServer.settings.port": 5501
 }
