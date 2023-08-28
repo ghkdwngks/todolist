@@ -1,10 +1,40 @@
-todo 추가
-todo 삭제
-todo 수정
-todo 기한 설정
-todo 우선순위 설정
-todo 완료/미완료 상태 전환
-todo 저장
-todo 불러오기
-todo 분류
-todo 출력
+Todo 관리
+addTodo
+saveTodo
+deleteTodo
+toggleComplete
+toggleUnComplete
+getAllTodos
+getTodayTodos
+getImportantTodos
+editTodos
+searchTodos
+
+화면 동작
+buildCalendar
+choiceDate
+prevCalendar
+nextCalendar
+leftPad
+addDeadLine
+addPriority
+handleDeadLine
+handlePriority
+resetDeadLineAndPriority
+displayDateInfo
+openEditModal
+closeEditModal
+showDirectDateInput
+handleDirectDateInput
+handleTodoTextClick
+showType
+handleFinTodos
+displaySearchResults
+paintTodo
+updateTodoCounts
+setDisplayNone
+showClassMenu
+hideSetButtons
+displayTodos
+showTodoClass
+init
