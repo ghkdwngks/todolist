@@ -38,3 +38,11 @@ hideSetButtons
 displayTodos
 showTodoClass
 init
+
+현재 상황
+todo 수정 시 동시에 수정됨
+todo 삭제 시 알림창 계속 출력
+
+todo 검색
+달력
+todo 필터링
