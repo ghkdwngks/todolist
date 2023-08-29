@@ -1,4 +1,4 @@
-import { TodoList } from "./todos.js";
+import TodoList from "./todos.js";
 
 const todoList = new TodoList();
 
@@ -20,6 +20,9 @@ const todosUl = document.querySelector(".todos");
 const finTodosUl = document.querySelector(".finTodoUl");
 
 const showFinTodos = document.querySelector(".showFinTodos");
+
+const todoMenu = document.querySelector(".todoMenu");
+const todoClass = document.querySelector(".todoClass");
 
 let currentDeadlineType = "";
 let currentDeadlineImgType = "";
@@ -215,5 +218,13 @@ const openEditModal = (todo) => {
     editModal.style.display = "none";
   });
 };
+
+todoMenu.addEventListener("click", () => {
+  if (todoClass.style.display === "none" || todoClass.style.display === "") {
+    todoClass.style.display = "block";
+  } else {
+    todoClass.style.display = "none";
+  }
+});
 
 window.addEventListener("DOMContentLoaded", loadTodosAndPaint);

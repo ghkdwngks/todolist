@@ -1,4 +1,4 @@
-class TodoList {
+export default class TodoList {
   constructor() {
     this.todolist = [];
     this.loadTodos();
@@ -52,5 +52,3 @@ class TodoList {
     }
   }
 }
-
-export { TodoList };
