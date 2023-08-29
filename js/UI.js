@@ -137,7 +137,8 @@ const paintTodo = () => {
 
     const checkBox = document.createElement("div");
     checkBox.classList.add("checkBox", `${todo.priority}img`);
-    checkBox.addEventListener("click", () => {
+    checkBox.addEventListener("click", (event) => {
+      event.stopPropagation();
       todoList.toggleCompletion(todo.id);
       paintTodo();
     });
@@ -216,6 +217,16 @@ const openEditModal = (todo) => {
   const cancelEditBtn = document.querySelector(".cancelEditBtn");
   cancelEditBtn.addEventListener("click", () => {
     editModal.style.display = "none";
+  });
+
+  const delBtn = document.querySelector(".delBtn");
+  delBtn.addEventListener("click", () => {
+    const confirmation = confirm("정말 삭제하시겠습니까?");
+    if (confirmation) {
+      todoList.deleteTodo(todo.id);
+      editModal.style.display = "none";
+      paintTodo();
+    }
   });
 };
 

@@ -51,4 +51,9 @@ export default class TodoList {
       this.saveTodos();
     }
   }
+
+  deleteTodo(id) {
+    this.todolist = this.todolist.filter((todo) => todo.id !== id);
+    this.saveTodos();
+  }
 }
