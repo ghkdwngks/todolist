@@ -198,7 +198,7 @@ ul {
 }
 
 .setPrio {
-  margin: 0.5vh 0 2vh 0;
+  margin: 0.5vh 0 2vh 10px;
   border-top: 1px solid #cccccc;
 }
 
@@ -213,7 +213,6 @@ ul {
 .p3img,
 .p4img {
   height: 28px;
-  margin-left: 10px;
   margin-right: 10px;
 }
 
@@ -441,7 +440,7 @@ ul {
   border-radius: 20%;
 }
 
-.todoText {
+.todoContent {
   font-size: 1.6rem;
   margin-left: 0.6vh;
   border: none;
@@ -449,13 +448,13 @@ ul {
   box-sizing: border-box;
 }
 
-.todoDeadLine {
+.todoDeadLineImg {
   display: flex;
   align-items: center;
   margin-left: 20px;
 }
 
-.showDeadline {
+.todoDeadLine {
   font-size: 1.1rem;
   color: #00489c;
 }
@@ -494,10 +493,6 @@ ul {
   background-color: black;
   color: white;
   display: flex;
-}
-
-.checkBoxImg {
-  filter: invert(100%);
 }
 
 .finTodoText {
