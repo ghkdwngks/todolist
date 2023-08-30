@@ -63,6 +63,33 @@ addInput.addEventListener("focus", () => {
   setButtons.style.display = "flex";
 });
 
+addBtn.addEventListener("click", () => {
+  const content = addInput.value.trim();
+  if (content !== "") {
+    todoList.addTodo(
+      content,
+      currentDeadlineType,
+      currentDeadlineImgType,
+      currentPriorityType
+    );
+    addInput.value = "";
+    setButtons.style.display = "none";
+    currentDeadlineType = "";
+    currentDeadlineImgType = "";
+    currentPriorityType = "p4";
+  }
+  paintTodo();
+});
+
+cancelBtn.addEventListener("click", () => {
+  setButtons.style.display = "none";
+  deadlineModal.style.display = "none";
+  priorityModal.style.display = "none";
+
+  setDeadLine.src = "imgs/deadline.png";
+  setPriority.className = "p4img";
+});
+
 setDeadLine.addEventListener("click", () => {
   if (deadlineModal.style.display === "none") {
     deadlineModal.style.display = "block";
@@ -222,40 +249,42 @@ const leftPad = (value) => {
   return value;
 };
 
-addBtn.addEventListener("click", () => {
-  const content = addInput.value.trim();
-  if (content !== "") {
-    todoList.addTodo(
-      content,
-      currentDeadlineType,
-      currentDeadlineImgType,
-      currentPriorityType
-    );
-    addInput.value = "";
-    setButtons.style.display = "none";
-    currentDeadlineType = "";
-    currentDeadlineImgType = "";
-    currentPriorityType = "p4";
-  }
-  paintTodo();
-});
+const displayDateInfo = () => {
+  const todayDay = document.getElementById("todayDay");
+  const tomorrowDay = document.getElementById("tomorrowDay");
+  const nextWeekDay = document.getElementById("nextWeekDay");
+  const todayDate = document.querySelector(".todayDate");
 
-cancelBtn.addEventListener("click", () => {
-  setButtons.style.display = "none";
-  deadlineModal.style.display = "none";
-  priorityModal.style.display = "none";
+  const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
 
-  setDeadLine.src = "imgs/deadline.png";
-  setPriority.className = "p4img";
-});
+  const currentDate = new Date();
+  const currentDayOfWeek = currentDate.getDay();
+  const currentMonth = currentDate.getMonth() + 1;
+  const currentDay = currentDate.getDate();
+  const currentDayName = weekdays[currentDayOfWeek];
 
-showFinTodos.addEventListener("click", () => {
-  if (finTodosUl.style.display === "none" || finTodosUl.style.display === "") {
-    finTodosUl.style.display = "block";
-    showFinTodos.innerText = "▽";
+  todayDay.textContent = currentDayName;
+
+  const tomorrowDate = new Date(currentDate);
+  tomorrowDate.setDate(currentDate.getDate() + 1);
+  const tomorrowDayOfWeek = tomorrowDate.getDay();
+  const tomorrowDayName = weekdays[tomorrowDayOfWeek];
+  tomorrowDay.textContent = tomorrowDayName;
+
+  const nextMonday = new Date(currentDate);
+  nextMonday.setDate(currentDate.getDate() + ((1 + 7 - currentDayOfWeek) % 7));
+  const nextMondayMonth = nextMonday.getMonth() + 1;
+  const nextMondayDay = nextMonday.getDate();
+  nextWeekDay.textContent = `${nextMondayMonth}월 ${nextMondayDay}일 월`;
+
+  todayDate.textContent = `${currentMonth}월 ${currentDay}일 ${currentDayName}요일`;
+};
+
+todoMenu.addEventListener("click", () => {
+  if (todoClass.style.display === "none" || todoClass.style.display === "") {
+    todoClass.style.display = "block";
   } else {
-    finTodosUl.style.display = "none";
-    showFinTodos.innerText = "▷";
+    todoClass.style.display = "none";
   }
 });
 
@@ -297,6 +326,16 @@ searchInput.addEventListener("keyup", (event) => {
 
 searchImg.addEventListener("click", () => {
   paintTodo();
+});
+
+showFinTodos.addEventListener("click", () => {
+  if (finTodosUl.style.display === "none" || finTodosUl.style.display === "") {
+    finTodosUl.style.display = "block";
+    showFinTodos.innerText = "▽";
+  } else {
+    finTodosUl.style.display = "none";
+    showFinTodos.innerText = "▷";
+  }
 });
 
 const paintTodo = () => {
@@ -388,37 +427,6 @@ const paintTodo = () => {
   updateTodoCounts();
 };
 
-const displayDateInfo = () => {
-  const todayDay = document.getElementById("todayDay");
-  const tomorrowDay = document.getElementById("tomorrowDay");
-  const nextWeekDay = document.getElementById("nextWeekDay");
-  const todayDate = document.querySelector(".todayDate");
-
-  const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
-
-  const currentDate = new Date();
-  const currentDayOfWeek = currentDate.getDay();
-  const currentMonth = currentDate.getMonth() + 1;
-  const currentDay = currentDate.getDate();
-  const currentDayName = weekdays[currentDayOfWeek];
-
-  todayDay.textContent = currentDayName;
-
-  const tomorrowDate = new Date(currentDate);
-  tomorrowDate.setDate(currentDate.getDate() + 1);
-  const tomorrowDayOfWeek = tomorrowDate.getDay();
-  const tomorrowDayName = weekdays[tomorrowDayOfWeek];
-  tomorrowDay.textContent = tomorrowDayName;
-
-  const nextMonday = new Date(currentDate);
-  nextMonday.setDate(currentDate.getDate() + ((1 + 7 - currentDayOfWeek) % 7));
-  const nextMondayMonth = nextMonday.getMonth() + 1;
-  const nextMondayDay = nextMonday.getDate();
-  nextWeekDay.textContent = `${nextMondayMonth}월 ${nextMondayDay}일 월`;
-
-  todayDate.textContent = `${currentMonth}월 ${currentDay}일 ${currentDayName}요일`;
-};
-
 const updateTodoCounts = () => {
   const nowCount = todoList.getNowTodosCount();
   const todayCount = todoList.getTodayTodosCount();
@@ -483,14 +491,6 @@ delBtn.addEventListener("click", () => {
     todoList.deleteTodo(editTodo.id);
     editModal.style.display = "none";
     paintTodo();
-  }
-});
-
-todoMenu.addEventListener("click", () => {
-  if (todoClass.style.display === "none" || todoClass.style.display === "") {
-    todoClass.style.display = "block";
-  } else {
-    todoClass.style.display = "none";
   }
 });
 
