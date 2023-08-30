@@ -44,5 +44,20 @@ todo 수정 시 동시에 수정됨
 todo 삭제 시 알림창 계속 출력
 
 todo 검색
-달력
+달력 
 todo 필터링
+
+//오늘 내일 요일 출력
+//오늘 날짜 월 일 출력
+//다음 주 월요일 날짜 출력
+
+//달력 출력 및 달력에서 날짜 선택 시 deadline 해당 날짜로
+
+//setDeadline 여러 번 클릭 시 display none block 전환
+//setPriority 여러 번 클릭 시 display none block 전환
+
+editModal editDeadlineSelect 직접 입력 선택 시 달력 띄워 날짜 선택
+
+todos.js, UI.js 코드 가독성 좋게 수정
+
+다음 주 월요일 달 출력

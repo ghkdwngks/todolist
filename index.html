@@ -79,32 +79,28 @@
             <div class="setDate" id="setToday">
               <img src="imgs/today.png" class="deadlineImg" />
               <div class="deadlineText">오늘</div>
-              <div class="deadlineDate" id="todayDate"></div>
+              <div class="deadlineDate" id="todayDay"></div>
             </div>
             <div class="setDate" id="setTomorrow">
               <img src="imgs/tomorrow.png" class="deadlineImg" />
               <div class="deadlineText">내일</div>
-              <div class="deadlineDate" id="tomorrowDate"></div>
+              <div class="deadlineDate" id="tomorrowDay"></div>
             </div>
             <div class="setDate" id="setNextWeek">
               <img src="imgs/nextWeek.png" class="deadlineImg" />
               <div class="deadlineText">다음 주</div>
-              <div class="deadlineDate" id="nextWeekDate"></div>
+              <div class="deadlineDate" id="nextWeekDay"></div>
             </div>
           </div>
           <div class="calendar">
             <table class="Calendar">
               <thead>
                 <tr>
-                  <td onClick="prevCalendar();" style="cursor: pointer">
-                    &#60;
-                  </td>
+                  <td class="prevCalendar" style="cursor: pointer">&#60;</td>
                   <td colspan="5">
                     <span id="calYear"></span>년 <span id="calMonth"></span>월
                   </td>
-                  <td onClick="nextCalendar();" style="cursor: pointer">
-                    &#62;
-                  </td>
+                  <td class="nextCalendar" style="cursor: pointer">&#62;</td>
                 </tr>
                 <tr>
                   <td>일</td>
@@ -152,7 +148,7 @@
               <option value="오늘">오늘</option>
               <option value="내일">내일</option>
               <option value="다음 주">다음 주</option>
-              <option value="직접 입력">직접 입력</option>
+              <option value="직접 선택">직접 선택</option>
               <option value="">X</option>
             </select>
             <input type="date" class="directDateInput" />

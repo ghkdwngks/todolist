@@ -509,11 +509,6 @@ function displaySearchResults(filteredTodos) {
 }
 
 function paintTodo(todo) {
-  let inboxCount = 0;
-  let todayCount = 0;
-  let importantCount = 0;
-  let finCount = 0;
-
   if (todo.completed) {
     const finLi = document.createElement("li");
     finLi.classList.add("todoItem");
@@ -619,17 +614,6 @@ function displayTodos() {
   filteredTodos.forEach((todo) => {
     paintTodo(todo);
   });
-}
-
-function showTodoClass(e) {
-  const currentClass = e.target;
-  const newClass = currentClass.id;
-
-  if (currentClass === newClass) return;
-
-  setCurrentClass(newClass);
-
-  displayTodos();
 }
 
 function init() {

@@ -56,4 +56,39 @@ export default class TodoList {
     this.todolist = this.todolist.filter((todo) => todo.id !== id);
     this.saveTodos();
   }
+
+  searchTodos(searchTerm) {
+    searchTerm = searchTerm.toLowerCase();
+    return this.todolist.filter((todo) => {
+      return todo.content.toLowerCase().includes(searchTerm);
+    });
+  }
+
+  getAllTodos() {
+    return this.todolist;
+  }
+
+  getTodayTodos() {
+    return this.todolist.filter((todo) => todo.deadline === "오늘");
+  }
+
+  getImportantTodos() {
+    return this.todolist.filter((todo) => todo.priority === "p1");
+  }
+
+  getNowTodosCount() {
+    return this.todolist.filter((todo) => !todo.isCompleted).length;
+  }
+
+  getTodayTodosCount() {
+    return this.todolist.filter((todo) => todo.deadline === "오늘").length;
+  }
+
+  getImportantTodosCount() {
+    return this.todolist.filter((todo) => todo.priority === "p1").length;
+  }
+
+  getCompletedTodosCount() {
+    return this.todolist.filter((todo) => todo.isCompleted).length;
+  }
 }
