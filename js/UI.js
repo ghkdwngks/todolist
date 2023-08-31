@@ -460,6 +460,28 @@ const openEditModal = (todo) => {
   editPrioritySelect.value = todo.priority;
 };
 
+editDeadlineSelect.addEventListener("change", () => {
+  const selectedTxt = this.textContent;
+
+  if (selectedTxt === "직접 선택") {
+    const selectDateInput = document.createElement("input");
+    selectDateInput.type = "date";
+    selectDateInput.classList.add("selectDate");
+
+    const editDeadline = document.querySelector(".editDeadline");
+    editDeadline.appendChild(selectDateInput);
+
+    selectDateInput.addEventListener("change", function () {
+      const selectedDate = new Date(this.value);
+      const selectedMonth = selectedDate.getMonth() + 1;
+      const selectedDay = selectedDate.getDate();
+
+      editDeadlineSelect.value = `${selectedMonth}월 ${selectedDay}일`;
+      editDeadline.removeChild(selectDateInput);
+    });
+  }
+});
+
 saveEditBtn.addEventListener("click", () => {
   if (editTodo) {
     const updatedContent = editTaskText.value;
