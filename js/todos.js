@@ -22,7 +22,7 @@ export default class TodoList {
       deadline: deadline,
       deadlineImg: deadlineImg,
       priority: priority,
-      isCompleted: isCompleted,
+      isCompleted: false,
     };
 
     this.todolist.push(newTodo);
@@ -81,11 +81,15 @@ export default class TodoList {
   }
 
   getTodayTodosCount() {
-    return this.todolist.filter((todo) => todo.deadline === "오늘").length;
+    return this.todolist.filter(
+      (todo) => !todo.isCompleted && todo.deadline === "오늘"
+    ).length;
   }
 
   getImportantTodosCount() {
-    return this.todolist.filter((todo) => todo.priority === "p1").length;
+    return this.todolist.filter(
+      (todo) => !todo.isCompleted && todo.priority === "p1"
+    ).length;
   }
 
   getCompletedTodosCount() {

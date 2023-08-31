@@ -47,6 +47,7 @@ const nextCalendar = document.querySelector(".nextCalendar");
 let currentDeadlineType = "";
 let currentDeadlineImgType = "";
 let currentPriorityType = "";
+
 let editTodo = null;
 let nowMonth = new Date();
 let today = new Date();
@@ -71,17 +72,18 @@ addBtn.addEventListener("click", () => {
       content,
       currentDeadlineType,
       currentDeadlineImgType,
-      currentPriorityType,
-      isCompleted
+      currentPriorityType
     );
     addInput.value = "";
     setButtons.style.display = "none";
     currentDeadlineType = "";
     currentDeadlineImgType = "";
     currentPriorityType = "p4";
-    isCompleted = false;
   }
   paintTodo();
+
+  setDeadLine.src = "imgs/deadline.png";
+  setPriority.className = "p4img";
 });
 
 cancelBtn.addEventListener("click", () => {
