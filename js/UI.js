@@ -8,6 +8,7 @@ const setButtons = document.querySelector(".setButtons");
 const setDeadLine = document.querySelector(".setDeadLine");
 const deadlineModal = document.querySelector(".deadlineModal");
 const deadlineOptions = document.querySelectorAll(".setDate");
+const dModalTitle = document.querySelector(".dModalTitle");
 
 const setPriority = document.querySelector(".setPriority");
 const priorityModal = document.querySelector(".priorityModal");
@@ -70,13 +71,15 @@ addBtn.addEventListener("click", () => {
       content,
       currentDeadlineType,
       currentDeadlineImgType,
-      currentPriorityType
+      currentPriorityType,
+      isCompleted
     );
     addInput.value = "";
     setButtons.style.display = "none";
     currentDeadlineType = "";
     currentDeadlineImgType = "";
     currentPriorityType = "p4";
+    isCompleted = false;
   }
   paintTodo();
 });
@@ -116,6 +119,13 @@ deadlineOptions.forEach((option) => {
     deadlineModal.style.display = "none";
     setDeadLine.src = currentDeadlineImgType;
   });
+});
+
+dModalTitle.addEventListener("click", () => {
+  currentDeadlineType = "";
+  currentDeadlineImgType = "";
+  setDeadLine.src = "imgs/deadline.png";
+  deadlineModal.style.display = "none";
 });
 
 setPriority.addEventListener("click", () => {

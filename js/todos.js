@@ -22,7 +22,7 @@ export default class TodoList {
       deadline: deadline,
       deadlineImg: deadlineImg,
       priority: priority,
-      isCompleted: false,
+      isCompleted: isCompleted,
     };
 
     this.todolist.push(newTodo);
