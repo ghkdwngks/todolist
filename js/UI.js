@@ -350,6 +350,59 @@ showFinTodos.addEventListener("click", () => {
   }
 });
 
+const openEditModal = (todo) => {
+  editTodo = todo;
+  editModal.style.display = "block";
+
+  editTaskText.value = todo.content;
+  editDeadlineSelect.value = todo.deadline;
+  editPrioritySelect.value = todo.priority;
+};
+
+saveEditBtn.addEventListener("click", () => {
+  if (editTodo) {
+    const updatedContent = editTaskText.value;
+    const updatedDeadline = editDeadlineSelect.value;
+    const updatedPriority = editPrioritySelect.value;
+
+    let updatedDeadlineImg = "";
+
+    if (updatedDeadline === "오늘") {
+      updatedDeadlineImg = "imgs/today.png";
+    } else if (updatedDeadline === "내일") {
+      updatedDeadlineImg = "imgs/tomorrow.png";
+    } else if (updatedDeadline === "다음 주") {
+      updatedDeadlineImg = "imgs/nextWeek.png";
+    } else if (updatedDeadline === "") {
+      updatedDeadlineImg = "";
+    }
+
+    todoList.updateTodo(
+      editTodo.id,
+      updatedContent,
+      updatedDeadline,
+      updatedDeadlineImg,
+      updatedPriority
+    );
+
+    editModal.style.display = "none";
+    paintTodo();
+  }
+});
+
+cancelEditBtn.addEventListener("click", () => {
+  editModal.style.display = "none";
+});
+
+delBtn.addEventListener("click", () => {
+  const confirmation = confirm("정말 삭제하시겠습니까?");
+  if (confirmation) {
+    todoList.deleteTodo(editTodo.id);
+    editModal.style.display = "none";
+    paintTodo();
+  }
+});
+
 const paintTodo = () => {
   todosUl.innerHTML = "";
   finTodosUl.innerHTML = "";
@@ -450,83 +503,6 @@ const updateTodoCounts = () => {
   importantDiv.querySelector(".todoClassCount").textContent = importantCount;
   document.querySelector(".countFinTodos").textContent = completedCount;
 };
-
-const openEditModal = (todo) => {
-  editTodo = todo;
-  editModal.style.display = "block";
-
-  editTaskText.value = todo.content;
-  editDeadlineSelect.value = todo.deadline;
-  editPrioritySelect.value = todo.priority;
-};
-
-editDeadlineSelect.addEventListener("change", () => {
-  const selectedTxt = this.textContent;
-
-  if (selectedTxt === "직접 선택") {
-    const selectDateInput = document.createElement("input");
-    selectDateInput.type = "date";
-    selectDateInput.classList.add("selectDate");
-
-    const editDeadline = document.querySelector(".editDeadline");
-    editDeadline.appendChild(selectDateInput);
-
-    selectDateInput.addEventListener("change", function () {
-      const selectedDate = new Date(this.value);
-      const selectedMonth = selectedDate.getMonth() + 1;
-      const selectedDay = selectedDate.getDate();
-
-      editDeadlineSelect.value = `${selectedMonth}월 ${selectedDay}일`;
-      editDeadline.removeChild(selectDateInput);
-    });
-  }
-});
-
-saveEditBtn.addEventListener("click", () => {
-  if (editTodo) {
-    const updatedContent = editTaskText.value;
-    const updatedDeadline = editDeadlineSelect.value;
-    const updatedPriority = editPrioritySelect.value;
-
-    let updatedDeadlineImg = "";
-
-    if (updatedDeadline === "오늘") {
-      updatedDeadlineImg = "imgs/today.png";
-    } else if (updatedDeadline === "내일") {
-      updatedDeadlineImg = "imgs/tomorrow.png";
-    } else if (updatedDeadline === "다음 주") {
-      updatedDeadlineImg = "imgs/nextWeek.png";
-    } else if (updatedDeadline === "직접 선택") {
-      updatedDeadlineImg = "imgs/calendar.png";
-    } else if (updatedDeadline === "") {
-      updatedDeadlineImg = "";
-    }
-
-    todoList.updateTodo(
-      editTodo.id,
-      updatedContent,
-      updatedDeadline,
-      updatedDeadlineImg,
-      updatedPriority
-    );
-
-    editModal.style.display = "none";
-    paintTodo();
-  }
-});
-
-cancelEditBtn.addEventListener("click", () => {
-  editModal.style.display = "none";
-});
-
-delBtn.addEventListener("click", () => {
-  const confirmation = confirm("정말 삭제하시겠습니까?");
-  if (confirmation) {
-    todoList.deleteTodo(editTodo.id);
-    editModal.style.display = "none";
-    paintTodo();
-  }
-});
 
 window.addEventListener("DOMContentLoaded", () => {
   loadTodosAndPaint();
